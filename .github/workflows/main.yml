@@ -1,0 +1,18 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+      - 'feature/**'
+
+jobs:
+  test-robot:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+        
+      - name: Say Hello
+        run: echo "Hello! The robot is working."
