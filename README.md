@@ -1,23 +1,26 @@
-# Py-Deploy: CI/CD Pipeline Project
+# Py-Deploy: Automated CI/CD Pipeline for Python
 
-This is the final year project for my BCA degree. The goal is to build a complete CI/CD (Continuous Integration / Continuous Deployment) pipeline for a simple Python Flask application.
+## 🚀 Project Overview
+Py-Deploy is a full-stack To-Do application built with **Python Flask** and **PostgreSQL**. It demonstrates a complete **DevOps lifecycle**, moving from local development to containerization and automated cloud deployment.
 
-## 🚀 Project Goal
+## 🛠️ Tech Stack
+* **Application:** Python 3.10, Flask
+* **Database:** PostgreSQL 14
+* **Containerization:** Docker & Docker Compose
+* **CI/CD:** GitHub Actions (Automated Build & Push)
+* **Cloud Infrastructure:** AWS EC2 (Ubuntu Linux)
+* **Server:** Gunicorn WSGI
 
-To demonstrate a full DevOps workflow:
-* Code is written on a local branch.
-* Pushed to GitHub.
-* Automatically tested.
-* Automatically deployed to a production server on AWS.
+## ⚙️ Key Features
+* **Containerized Architecture:** Fully isolated application and database services using Docker.
+* **Persistent Storage:** Data persistence managed via Docker Volumes.
+* **Automated CI Pipeline:** GitHub Actions workflow triggers on every push to build and push images to Docker Hub.
+* **Cloud Hosted:** Deployed on a live AWS EC2 instance.
 
-## 🛠️ Technologies Used
-
-* Python (Flask)
-* Git & GitHub
-* Docker
-* Jenkins
-* Terraform
-* Ansible
-* AWS
-
-Edited with nano
+## 🔧 How to Run Locally
+1.  Clone the repository.
+2.  Run with Docker Compose:
+    ```bash
+    docker-compose up -d
+    ```
+3.  Access the app at `http://localhost:5000`.
