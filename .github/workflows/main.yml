@@ -10,11 +10,7 @@ jobs:
   # --- JOB 1: TEST ---
   test:
     runs-on: ubuntu-latest
-    
-    # ⚠️ IMPORTANT: We give a dummy DB URL so your app doesn't crash
-    env:
-      DB_URL: sqlite:///:memory:
-      
+
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
