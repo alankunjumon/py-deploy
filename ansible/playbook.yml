@@ -1,0 +1,20 @@
+---
+- name: Setup server
+  hosts: all
+  become: yes
+
+  tasks:
+    - name: Update apt cache
+      apt:
+        update-cache: yes
+
+    - name: Install system tools
+      apt:
+        name:
+          - python3-pip
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+          - htop
+        state: present
+
