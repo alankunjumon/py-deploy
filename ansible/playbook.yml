@@ -18,3 +18,18 @@
           - htop
         state: present
 
+    - name: Install docker SDK for python
+      apt:
+        name: python3-docker
+        state: present
+
+    - name: Run py-deploy app
+      docker_container:
+        name: my-app
+        image: alankunjumon/bca-devops-project:latest
+        state: started
+        restart_policy: always
+        ports:
+          - "80:5000"
+        env:
+          DB_URL: "sqlite:////tmp/test.db:"
