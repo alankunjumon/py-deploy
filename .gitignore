@@ -1,3 +1,11 @@
 venv/
 __pycache__/
 *.pem
+# Terraform specific
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+override.tf
+override.tf.json
+.terraform.lock.hcl  # Optional: Some teams keep this, some ignore it. For now, you can keep it or ignore it.
