@@ -1,7 +1,7 @@
 name: Destroy Infrastructure
 
 on: 
-  worklow_dispatch:
+  workflow_dispatch:
 
 jobs:
   destroy:
