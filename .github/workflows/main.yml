@@ -68,3 +68,19 @@ jobs:
 
       - name: Verify AWS connection
         run: aws sts get-caller-identity
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Terraform apply
+        working-directory: ./terraform
+        run: |
+          terraform init
+          terraform apply -auto-approve
+
+      - name: Create dynamic inventory
+        working-directory: ./terraform
+        run: |
+          terraform output -raw server_public_ip > ../ansible/inventory
+          echo "Inventory file created with ip:"
+          cat ../ansible/inventory
