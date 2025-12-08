@@ -6,6 +6,14 @@ terraform {
     }
   }
   required_version = ">=1.2.0"
+
+  backend "s3" {
+    bucket         = "py-deploy-state-alankunjumon-2025"
+    key            = "global/s3/terraform.tfstate"
+    region         = "us-east-1"
+    dynamodb_table = "py-deploy-lock-table"
+    encrypt        = true
+  }
 }
 provider "aws"{
   region = "us-east-1"
