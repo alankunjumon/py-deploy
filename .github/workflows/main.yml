@@ -88,6 +88,9 @@ jobs:
           terraform init
           terraform apply -auto-approve
 
+      - name: Wait for SSH to wake up
+        run: sleep 60
+
       - name: Create dynamic inventory
         working-directory: ./terraform
         run: |
