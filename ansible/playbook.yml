@@ -12,9 +12,8 @@
       apt:
         name:
           - python3-pip
-          - docker-ce
-          - docker-ce-cli
-          - containerd.io
+          - docker.io
+          - docker-compose
           - htop
         state: present
 
