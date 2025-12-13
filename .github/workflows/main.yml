@@ -72,15 +72,33 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
 
+      - name: Install Ansible
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ansible
+
+      - name: Setup SSH Agent
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.AWS_SSH_KEY }}
+
       - name: Terraform apply
         working-directory: ./terraform
         run: |
           terraform init
           terraform apply -auto-approve
 
+      - name: Wait for SSH to wake up
+        run: sleep 60
+
       - name: Create dynamic inventory
         working-directory: ./terraform
         run: |
-          terraform output -raw server_public_ip > ../ansible/inventory
-          echo "Inventory file created with ip:"
-          cat ../ansible/inventory
+          SERVER_IP=$(terraform output -raw server_public_ip)
+          echo "[web]" > ../ansible/inventory
+          echo "$SERVER_IP ansible_user=ubuntu ansible_ssh_common_args='-o StrictHostKeyChecking=no'" >> ../ansible/inventory
+          echo "Inventory created with ip $SERVER_IP"
+
+      - name: Run Ansible Playbook
+        run: |
+          ansible-playbook -i ansible/inventory ansible/playbook.yml --private-key ${{ env.SSH_AUTH_SOCK }}
