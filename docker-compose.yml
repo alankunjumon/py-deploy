@@ -1,6 +1,6 @@
 services:
   app:
-    build: .
+    image: alankunjumon/bca-devops-project:latest
     ports:
       - "5000:5000"
     environment:

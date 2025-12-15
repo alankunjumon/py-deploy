@@ -11,24 +11,22 @@
     - name: Install system tools
       apt:
         name:
-          - python3-pip
           - docker.io
           - docker-compose
-          - htop
         state: present
 
-    - name: Install docker SDK for python
-      apt:
-        name: python3-docker
-        state: present
+    - name: Copy docker-compose.yml to server
+      copy:
+        src: ../docker-compose.yml
+        dest: /home/ubuntu/docker-compose.yml
 
-    - name: Run py-deploy app
-      docker_container:
-        name: my-app
-        image: alankunjumon/bca-devops-project:latest
-        state: started
-        restart_policy: always
-        ports:
-          - "80:5000"
-        env:
-          DB_URL: "sqlite:////tmp/test.db:"
+    - name: Tear down exisiting containers
+      command: docker-compose down
+      args:
+        chdir: /home/ubuntu
+      ignore_errors: yes
+
+    - name: Start App and DB
+      command: docker-compose up -d
+      args:
+        chdir: /home/ubuntu
