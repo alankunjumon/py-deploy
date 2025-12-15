@@ -30,3 +30,15 @@
       command: docker-compose up -d
       args:
         chdir: /home/ubuntu
+
+    - name: Wait for database to initialise
+      wait_for:
+        timeout: 20
+
+    - name: Create database tables
+      command: docker-compose exec -T app sh -c "cd src && python -c '...'"
+      register: db_setup
+      retries: 3
+      delay: 10
+      until: db_setup.rc == 0
+      ignore_errors: yes
