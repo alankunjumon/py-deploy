@@ -1,8 +1,10 @@
 import os
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
+from prometheus_flask_exporter import PrometheusMetrics
 
 app = Flask(__name__)
+metrics = PrometheusMetrics(app)
 
 # --- 1. CONNECT TO THE DATABASE ---
 # Improvement: Add a fallback to SQLite for local testing safety
