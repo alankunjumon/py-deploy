@@ -42,3 +42,20 @@
       delay: 10
       until: db_setup.rc == 0
       ignore_errors: yes
+
+    - name: Copy prometheus configuration
+      copy:
+        src: prometheus.yml
+        dest: /home/ubuntu/prometheus.yml
+
+    - name: Run Promethues Container
+      community.docker.docker_container:
+        name: prometheus
+        image: prom/prometheus
+        state: started
+        restart_policy: always
+        ports:
+          - "9090:9090"
+        volumes:
+          - /home/ubuntu/prometheus.yml:/etc/prometheus/prometheus.yml
+
