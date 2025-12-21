@@ -57,5 +57,5 @@
         ports:
           - "9090:9090"
         volumes:
-          - home/ubuntu/prometheus.yml:/etc/prometheus/prometheus.yml
+          - /home/ubuntu/prometheus.yml:/etc/prometheus/prometheus.yml
 
