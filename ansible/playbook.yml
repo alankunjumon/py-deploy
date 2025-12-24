@@ -58,4 +58,16 @@
           - "9090:9090"
         volumes:
           - /home/ubuntu/prometheus.yml:/etc/prometheus/prometheus.yml
+        networks:
+          - name: app_network
 
+    - name: Run Grafana Container
+      community.docker.docker_container:
+        name: grafana
+        image: grafana/grafana:latest
+        state: started
+        restart_policy: always
+        ports:
+          - "3000:3000"
+        networks:
+          - name: app_network
