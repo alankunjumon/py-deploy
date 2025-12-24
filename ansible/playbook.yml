@@ -26,6 +26,10 @@
         chdir: /home/ubuntu
       ignore_errors: yes
 
+    - name: Create a network
+      community.docker.docker_network:
+        name: app_network
+
     - name: Start App and DB
       command: docker-compose up -d
       args:
