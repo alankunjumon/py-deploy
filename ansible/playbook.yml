@@ -88,4 +88,4 @@
         networks:
           - name: app_network
         volumes: 
-          - name: /home/ubuntu/datasource.yml:/etc/grafana/provisioning/datasources/datasource.yml
+          - /home/ubuntu/datasource.yml:/etc/grafana/provisioning/datasources/datasource.yml
