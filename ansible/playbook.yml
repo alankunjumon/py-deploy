@@ -65,6 +65,18 @@
         networks:
           - name: app_network
 
+    - name: Create Grafana Datasource Config
+      copy:
+        dest: /home/ubuntu/datasource.yml
+        content: |
+          apiVersion: 1
+          datasources:
+            - name: Prometheus
+              type: prometheus
+              access: proxy
+              url: http://prometheus:9090
+              isDefault: true
+
     - name: Run Grafana Container
       community.docker.docker_container:
         name: grafana
@@ -75,3 +87,5 @@
           - "3000:3000"
         networks:
           - name: app_network
+        volumes: 
+          - /home/ubuntu/datasource.yml:/etc/grafana/provisioning/datasources/datasource.yml
