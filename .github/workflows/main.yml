@@ -88,17 +88,20 @@ jobs:
           terraform init
           terraform apply -auto-approve
 
-      - name: Wait for SSH to wake up
-        run: sleep 60
-
       - name: Create dynamic inventory
         working-directory: ./terraform
         run: |
           SERVER_IP=$(terraform output -raw server_public_ip)
+          echo "SERVER_IP=$SERVER_IP" >> $GITHUB_ENV
           echo "[web]" > ../ansible/inventory
           echo "$SERVER_IP ansible_user=ubuntu ansible_ssh_common_args='-o StrictHostKeyChecking=no'" >> ../ansible/inventory
           echo "Inventory created with ip $SERVER_IP"
 
+      - name: Wait for SSH to wake up
+        run: until ssh -o StrictHostKeyChecking=no ubuntu@$SERVER_IP 'echo ready'; do sleep 10; done
+
       - name: Run Ansible Playbook
         run: |
-          ansible-playbook -i ansible/inventory ansible/playbook.yml --private-key ${{ env.SSH_AUTH_SOCK }}
+          ansible-playbook -i ansible/inventory ansible/playbook.yml
+
+# NOTE: IAM user credentials are used for simplicity.
