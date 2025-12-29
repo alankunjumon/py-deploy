@@ -96,6 +96,7 @@ jobs:
         working-directory: ./terraform
         run: |
           SERVER_IP=$(terraform output -raw server_public_ip)
+          echo "SERVER_IP=$SERVER_IP" >> $GITHUB_ENV
           echo "[web]" > ../ansible/inventory
           echo "$SERVER_IP ansible_user=ubuntu ansible_ssh_common_args='-o StrictHostKeyChecking=no'" >> ../ansible/inventory
           echo "Inventory created with ip $SERVER_IP"
