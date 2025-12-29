@@ -46,7 +46,7 @@ The architecture follows a clear separation of responsibilities:
 
 **Terraform** is used to define and provision the cloud infrastructure required for the application. This includes the EC2 instance and associated AWS resources. Terraform execution is automated as part of the CI/CD workflow using a remote backend, with state stored in an **S3 bucket** and state locking enabled via **DynamoDB** to prevent concurrent executions.
 
-**Ansible** is used for configuration management after infrastructure provisioning. It connects to the EC2 instance to install system dependencies, configure services, deploy the application container, and set up the monitoring stack.
+**Ansible** is used for configuration management after infrastructure provisioning. It connects to the EC2 instance to install system dependencies, configure services, deploy the application container, and set up the monitoring stack. Ansible uses a combination of declarative Docker modules and Docker Compose commands to balance clarity and simplicity for CI/CD-driven redeployments.
 
 **Docker** is used to package the application into a container image, enabling consistent runtime behavior across environments. The container image is built during the CI/CD process and pulled onto the EC2 instance during deployment.
 
