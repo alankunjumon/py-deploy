@@ -1,7 +1,11 @@
 name: Destroy Infrastructure
 
-on: 
+on:
   workflow_dispatch:
+    inputs:
+      confirm_destroy:
+        description: 'Type DESTROY to confirm infrastructure destruction'
+        required: true
 
 jobs:
   destroy:
@@ -20,6 +24,13 @@ jobs:
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
+
+      - name: Validate destroy confirmation
+        run: |
+          if [ "${{ github.event.inputs.confirm_destroy }}" != "DESTROY" ]; then
+            echo "Destroy not confirmed. Exiting."
+            exit 1
+          fi
 
       - name: Terraform Destroy
         working-directory: ./terraform
