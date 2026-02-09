@@ -104,4 +104,8 @@ jobs:
         run: |
           ansible-playbook -i ansible/inventory ansible/playbook.yml
 
+      - name: confirmation
+        run: |
+          echo "Deployment Successful"
+
 # NOTE: IAM user credentials are used for simplicity.
