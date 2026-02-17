@@ -106,6 +106,6 @@ jobs:
 
       - name: confirmation
         run: |
-          echo "Deployment Successful"
+          echo "Deployment Successful and is accessible on ip"
 
 # NOTE: IAM user credentials are used for simplicity.
