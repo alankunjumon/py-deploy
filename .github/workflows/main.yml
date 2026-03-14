@@ -104,8 +104,4 @@ jobs:
         run: |
           ansible-playbook -i ansible/inventory ansible/playbook.yml
 
-      - name: confirmation
-        run: |
-          echo "Deployment Successful and is accessible on ip. Please access it through browser"
-
 # NOTE: IAM user credentials are used for simplicity.
