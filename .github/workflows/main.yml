@@ -104,11 +104,4 @@ jobs:
         run: |
           ansible-playbook -i ansible/inventory ansible/playbook.yml
 
-      - name: Status
-        run: |
-          echo "Ran Successfully"
-
-      - name: Status
-        run: |
-          echo "result view"    
 # NOTE: IAM user credentials are used for simplicity.
